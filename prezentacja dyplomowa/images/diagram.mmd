@@ -1,0 +1,7 @@
+graph TD
+    A[Przychodząca wiadomość email] --> B[Przetwarzanie wstępne: czyszczenie tekstu, tokenizacja, ekstrakcja cech]
+    B --> C[Klasyfikacja z wykorzystaniem LLM]
+    C --> D{Spam czy wiadomość pożądana?}
+    D -->|Spam| E[Oznaczenie jako spam/phishing]
+    D -->|Pożądana| F[Oznaczenie jako wiadomość pożądana]
+

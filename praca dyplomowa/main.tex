@@ -1,0 +1,424 @@
+% !TeX document-id = {0b75489a-6e79-4ace-8cb1-4028f93ab758}
+% !TEX encoding = UTF-8 Unicode
+% !TeX spellcheck = pl_PL
+% !TEX TS-program = xelatex
+% !TeX TXS-program:bibliography = txs:///biber
+% !TeX TXS-program:index = txs:///makeindex
+
+\documentclass[skorowidz,skroty]{dyplomWEZUT}
+\usepackage{float}
+% ------------------------------------------------------------------------------
+% Opcje klasy <dyplomWEZUT>
+% 1) skorowidz - włącza skorowidz
+% 2) skroty    - włącza wykaz ważniejszych skrótów i oznaczeń
+% ------------------------------------------------------------------------------
+
+
+% -------------------------- Dane pracy dyplomowej -----------------------------
+
+\author{Paweł Siwoń}
+\nralbumu{56708}
+\title{Zastosowanie sztucznej inteligencji w klasyfikacji wiadomości e-mail: implementacja i analiza wydajności}
+\tytulang{Applying artificial intelligence to email classification: implementation and performance analysis}
+\kierunek{Informatyka}
+\rodzajstudiow{S2}
+\specjalnosc{Projektowanie oprogramowania}
+
+% Data wydania tematu w SIWE/eDziekanacie
+\datawydania{12.12.2024}
+
+% Data dopuszczenia pracy do egzaminu (wypełnia Dziekanat)
+\datazlozenia{......................................}
+
+% Rok złożenia pracy (zmienić, jeśli inny niż 2024)
+\date{2025}
+\opiekun{dr~hab.~inż.~Tomasz~Hyla,~-~prof.~ZUT}
+\jednostka{Katedra Inżynierii Oprogramowania i Cyberbezpieczeństwa}
+
+\slowakluczowe{klasyfikacja email, sztuczna inteligencja, wykrywanie spamu, wykrywanie phishingu, uczenie maszynowe}
+\keywords{email classification, artificial intelligence, spam detection, phishing detection, machine learning}
+
+\makemetadata
+
+\begin{document}
+
+\begin{streszczenie}
+Streszczenie pracy w~języku polskim zgodnie z~zaleceniami umieszczonymi w~rozdziale~\ref{subsec:streszczenie} na stronie~\pageref{subsec:streszczenie}. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami.
+\end{streszczenie}
+
+\begin{abstract}
+Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami umieszczonymi w~rozdziale~\ref{subsec:streszczenie} na stronie~\pageref{subsec:streszczenie}. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami.
+\end{abstract}
+
+\maketitle
+
+\begin{wprowadzenie}
+
+Niniejszy dokument stanowi podstawowy zestaw wymagań i~zaleceń dotyczących przygotowywania i~oceniania prac dyplomowych magisterskich i~inżynierskich\footnote{w~zależności od rodzaju pracy w~miejscach, gdzie w~niniejszym dokumencie występują wyrażenia opcjonalne np.~,,magisterska/inżynierska'', należy pozostawić tylko właściwe sformułowanie. Dotyczy to również strony tytułowej.} realizowanych na Wydziale Elektrycznym Zachodniopomorskiego Uniwersytetu Technologicznego w~Szczecinie.
+
+W~rozdziale pierwszym zawarto podstawowe informacje o~elementach, jakie powinna zawierać praca dyplomowa. Wyszczególnienie pewnych ogólnie przyjętych elementów składowych tego typu opracowań ma pomóc dyplomantom w~poprawnym zredagowaniu pracy pod względem merytorycznym. Wymienione tu zagadnienia będą również wpływały na ocenę końcową przedłożonej pracy.  Rozdział drugi, jak i~cały skład niniejszego dokumentu, stanowi zestaw zaleceń edytorskich, jakie powinny spełniać prace dyplomowe pisane przez dyplomantów WE ZUT.
+
+\end{wprowadzenie}
+
+\cel{Zwięzły opis celu pracy dyplomowej. Należy pamiętać, aby cel
+omówiony w~tym miejscu wynikał z~zakresu określonego przez opiekuna
+w~karcie pracy dyplomowej.}
+
+\zakres{Zwięzły opis zakresu pracy dyplomowej. Należy pamiętać, aby
+zakres pracy omówiony w~tym miejscu był zgodny z~określonym przez
+opiekuna w~karcie pracy dyplomowej.} 
+
+\chapter{Zalecenia dotyczące treści i~kryteriów oceny pracy dyplomowej}\label{chap:pierwszy}
+
+Praca dyplomowa, pisana pod kierunkiem promotora (opiekuna), stanowi uwieńczenie całego okresu studiów i~powinna być dowodem na to, że jej autor posiadł odpowiednio wysoki poziom wiedzy merytorycznej z~danego zakresu i~potrafi tę wiedzę w~określonym węższym zakresie przetwarzać, a~wyniki tego przetworzenia przedstawić w~postaci opracowania mającego znamiona nowości naukowej lub technicznej. Ponieważ absolwent WE ZUT uzyskuje tytuł zawodowy inżyniera lub magistra inżyniera, jego praca dyplomowa powinna zawierać twórcze elementy praktyczne. 
+
+Praca dyplomowa inżynierska powinna dotyczyć samodzielnej analizy lub rozwiązania określonego problemu technicznego na drodze badań symulacyjnych lub laboratoryjnych albo zaprojektowania lub wykonania prototypu urządzenia, stanowiska laboratoryjnego, pomocy dydaktycznej, programu komputerowego, itp.
+
+Praca dyplomowa magisterska powinna dotyczyć samodzielnej analizy lub rozwiązania określonego problemu technicznego albo wykonania projektu, konstrukcji lub wykonania prototypu urządzenia, stanowiska laboratoryjnego, pomocy dydaktycznej, itp., z~wyraźnym uwzględnieniem aspektów teoretycznych zagadnienia, albo samodzielnej analizy wyodrębnionego problemu naukowego.
+
+Oba rodzaje prac dyplomowych powinny bazować na możliwie nowej literaturze naukowej i/lub technicznej.
+
+Pisanie pracy dyplomowej powinno być zawsze okazją do rozwoju intelektualnego autora.
+
+\section{Treść pracy}\label{sec:trescpracy}
+
+Treść pracy dyplomowej powinna udowadniać, że~\cite{Zenderowski2004}:
+
+\begin{enumerate}
+
+\item Autor potrafi poprawnie formułować problemy badawcze i~inżynierskie oraz metodycznie dążyć do ich rozwiązania;
+
+\item Dyplomant posiada zdolność sprawnego korzystania z~dostępnych zasobów wiedzy naukowej i~technicznej, w~związku z~czym potrafi odpowiednio wyselekcjonować literaturę z~danego zakresu oraz dokonać odpowiednich, wstępnych opracowań na jej podstawie. Umiejętność selekcji literatury, tzn. posługiwanie się przejrzystym i~racjonalnym kryterium doboru (pozwalającym odrzucić pozycje pseudonaukowe lub o~nikłym związku
+z~tematem) jest szczególnie istotna dla oceny pracy. ,,Bibliografia" zamieszczona na końcu pracy pozwala bowiem w~dużym stopniu wyrobić sobie pogląd na temat zakresu zapoznania się autora z~daną problematyką. Autor powinien pamiętać, że nie liczba pozycji literaturowych lecz ich jakość podwyższa wartość merytoryczną i~ocenę pracy.
+
+\item Dyplomant potrafi na podstawie zgromadzonych i~odpowiednio wyselekcjonowanych oraz skatalogowanych materiałów stworzyć tekst o~charakterze naukowym lub technicznym. Tekst powinien być poprawny pod względem:
+
+\begin{description}
+\item[rzeczowo-merytorycznym] tzn. bezbłędnie i~treściwie przedstawiać wszystkie istotne fakty, podać ich opis zgodny ze stanem rzeczywistym, oraz zwracać uwagę na prawidłowości występujące w~obrębie analizowanych zjawisk;
+\item[metodologicznym] tzn. powinien zawierać opis umiejętnie zastosowanych metod, technik i~narzędzi badawczych, właściwych dla danej dziedziny wiedzy i~adekwatnych do podjętego problemu naukowego lub technicznego;
+\item[logiczno-stylistycznym] tzn. powinien zawierać tezy stawiane w~sposób wzajemnie niesprzeczny, ściśle używane pojęcia --- nieużywanie tego samego pojęcia na określenie różnych stanów rzeczywistości, poprawnie formułowane myśli i~wnioski wynikające z~przeprowadzonych analiz itd.
+\end{description}
+
+\textbf{Tekst pracy nie może w~żadnym przypadku stanowić wyłącznie kompilacji innych tekstów!}
+
+\item Autor potrafi wykorzystać przedstawioną wiedzę teoretyczną do rozwiązania problemów inżynierskich;
+
+\item Dyplomant nabył podstawowe umiejętności redakcyjne w~zakresie pisania prac o~charakterze naukowym lub technicznym; oznacza to opanowanie powszechnie przyjętych zasad w~zakresie konstruowania struktury pracy, jej języka i~stylu, wykonywania przypisów i~bibliografii, dokumentacji technicznej itd.
+
+\end{enumerate}
+
+\noindent\textbf{Powyższe pięć wymagań w~istotny sposób wpływa na ocenę uzyskiwaną w~recenzjach pracy dyplomowej}. Ponadto na ocenę pracy wpływa:
+
+\begin{description}
+\item [oryginalność] rozumiana jako np. nowe ujęcie badanego problemu, interesujące, oryginalne zaprezentowanie wiedzy nienowej, ale np. mało znanej, udane wieloźródłowe (również z~wykorzystaniem źródeł obcojęzycznych) opracowanie czy usystematyzowanie danej wiedzy, własna interpretacja problemu, pogłębiona analiza przedstawionych zagadnień itp.;
+\item [przydatność praktyczna] tzn. opracowanie nowego urządzenia, programu komputerowego, dokonanie eksperymentu oraz zebranie i~opracowanie danych pomiarowych itp., walory dydaktyczne przedstawionego opracowania, studia literaturowe przydatne w~dalszej pracy naukowej itp.
+\end{description}
+
+\noindent Jak wspomniano wcześniej podczas redagowania pracy należy w~sposób szczególny dbać o~poszanowanie cudzych praw autorskich. Czytelnik powinien być w~jednoznaczny sposób informowany, poprzez stosowanie odpowiednich odnośników do bibliografii, które z~fragmentów pracy stworzone zostały w~oparciu o~literaturę przedmiotu, a~które stanowią oryginalne przemyślenia i~osiągnięcia autora. Należy również pamiętać, że odwzorowywanie w~pracy zdjęć, rysunków, tabel itp. bez podania źródła stanowi pogwałcenie cudzych praw autorskich. Dlatego zaleca się, aby tego typu elementy pracy były wykonane samodzielnie z~uwzględnieniem własnych przemyśleń i~modyfikacji. Autor pracy dyplomowej musi być świadomy, że konsekwencją udowodnienia pogwałcenia cudzych praw autorskich może być nawet cofnięcie decyzji o~przyznaniu tytułu zawodowego\footnote{Zgodnie z art. 77. ust. 5 ustawy z dnia 20 lipca 2018 r. Prawo o szkolnictwie wyższym i nauce:  \textit{W~przypadku  gdy w~pracy dyplomowej stanowiącej podstawę nadania tytułu zawodowego  osoba ubiegająca się o~ten tytuł przypisała sobie autorstwo istotnego fragmentu lub innych elementów cudzego utworu lub ustalenia naukowego, rektor, w~drodze decyzji administracyjnej, stwierdza nieważność dyplomu.}}.
+
+\section{Podział treści pracy}\label{sec:podzialtresci}
+
+Tekst pracy dyplomowej zwyczajowo składa się z~wprowadzenia, rozdziałów zasadniczych oraz zakończenia. Tekst zasadniczy powinien obejmować 60--80 stron. W~spisie treści numerujemy rozdziały zasadnicze i~dodatki natomiast wprowadzenie, zakończenie, bibliografia i~inne mogą nie być numerowane.
+
+\subsection{Streszczenie}\label{subsec:streszczenie}
+
+Streszczenia pracy w~języku polskim i~angielskim o~długości ok.~10 wierszy każde (ok.~800 znaków) umieszcza się na czwartej stronie pracy. Streszczenie powinno zwięźle przedstawiać podstawowe tezy i~cele pracy, precyzować problem i~metody badawcze oraz prezentować najważniejsze wyniki.
+
+\subsection{Wprowadzenie}\label{subsec:wprowadzenie}
+
+We wprowadzeniu pracy dyplomowej powinny być zawarte następujące treści:
+
+\begin{enumerate}
+    \item ogólne wprowadzenie do problematyki poruszanej w~pracy;
+    \item omówienie koncepcji pracy i~opis podjętego problemu badawczego:
+        \begin{itemize}
+            \item obiektywne i~subiektywne motywy podjęcia tematu,
+            \item cele pracy,
+            \item zakres pracy,
+            \item metody, techniki i~narzędzia badawcze.
+        \end{itemize}
+\end{enumerate}
+
+\noindent Cele i~zakres pracy należy zredagować i~wyróżnić w~sposób pokazany na
+stronie~\pageref{cel}.
+
+\subsection{Konstrukcja rozdziału pracy}\label{subsec:konstrukcja}
+
+Każdy rozdział powinien być \textbf{logicznie powiązany z~resztą pracy}. Nie powinien on stanowić autonomicznej części związanej ze strukturą pracy jedynie samym tytułem. Treść rozdziału powinna logicznie wynikać z~treści poprzedniego i~implikować porządek rozdziału następującego po nim.  W~pracy dyplomowej powinny w~zasadzie znaleźć się co najmniej trzy rozdziały, ale nie powinno ich być też zbyt dużo. Pierwszy rozdział pracy powinien prezentować dotychczasowy stan wiedzy, wyniki oraz rozwiązania techniczne dotyczące poruszanej tematyki wraz z~krytyczną analizą tego stanu i~uzasadnieniem dokonanego doboru literatury. Każdy rozdział powinien --- podobnie jak cała praca --- posiadać swoją strukturę, formalny układ treści. I~tak, rozpoczynając dany rozdział należy --- zanim zacznie się omawianie poszczególnych podrozdziałów i~paragrafów --- \textbf{scharakteryzować pokrótce treść rozdziału.} Należy tutaj wymienić wstępnie tematykę podrozdziałów, wskazując na ich istotny związek z~tematem rozdziału. Należy pamiętać, że zadaniem każdego rozdziału jest ustosunkowanie się do określonej części (aspektu) postawionego we wprowadzeniu problemu badawczego. W~dalszej części rozdziału powinny mieć miejsce szczegółowe rozważania nad wybranymi aspektami problemu zdefiniowanego we wstępie do rozdziału. Rozdział powinien kończyć się podsumowaniem wniosków wypływających z~przeprowadzonych analiz.
+
+% Zakończenie
+\subsection{Zakończenie}\label{sec:zakonczenie}
+
+\index{zakończenie}Zakończenie jest niezbędnym elementem pracy dyplomowej. Powinny się w~nim znaleźć następujące elementy:
+
+\begin{enumerate}
+\item podsumowanie uzyskanych wyników (niekoniecznie pozytywnych);
+\item odpowiedzi na postawione we wprowadzeniu pytania problemowe (w~świetle wyników, przeprowadzonych analiz lub przemyśleń);
+\item omówienie obiektywnych trudności występujących w~trakcie badań, wskazanie ich przyczyn i~konsekwencji;
+\item przedstawienie możliwości kontynuowania rozpoczętych badań, nowych pomysłów, które pojawiły się podczas pisania pracy, wskazanie wątków i~obszarów problemowych wymagających dodatkowej naukowej analizy, lecz wychodzących poza ramy danej pracy itd.
+\end{enumerate}
+
+\noindent Powyższe wymagania dotyczące treści pracy dyplomowej zredagowano na podstawie dostępnej literatury~\cite{Boc2003,Honczarenko2000,Opoka2001,Pioterek1997,Zenderowski2004}.
+
+\chapter{Strona formalno-edytorska pracy}\label{chap:editing}
+
+Jak wspomniano we wprowadzeniu, struktura i~strona edytorska niniejszego dokumentu zgodne są z~zaleceniami dotyczącymi formatowania podstawowych elementów składowych pracy dyplomowej na Wydziale Elektrycznym Zachodniopomorskiego Uniwersytetu Technologicznego w~Szczecinie oraz Zarządzeniem nr 80 Rektora ZUT z~dnia 13 czerwca 2022~r. w~sprawie Procedury procesu dyplomowania w~ZUT, które ściśle regulują zasady edycji prac dyplomowych. Poniżej przedstawione zostały wytyczne jak należy formatować poszczególne, najistotniejsze elementy występujące w~pracy dyplomowej. Redagując pracę dyplomant powinien w~maksymalnym stopniu wzorować się na niniejszym dokumencie i~w~miarę możliwości przestrzegać poniższych zaleceń.
+
+Podczas edycji można posługiwać się dowolnym, legalnie posiadanym przez siebie edytorem lub systemem do składu tekstu, np. typu WYSIWYG (MS Word, OpenOffice, LibreOffice, itp.) lub LaTeX. Wiele z~tych narzędzi edytorskich umożliwia użycie specjalnie przygotowanych szablonów, zapewniających automatyczne formatowanie istotnych elementów pracy (rysunki, tabele, wzory, numeracje, wyliczenia, odnośniki literaturowe itp.) oraz generację spisów: treści, tabel, rysunków, ważniejszych oznaczeń i~skrótów, kodów źródłowych, skorowidza oraz bibliografii. Szczególnie bogate funkcje w~tym zakresie ma bezpłatny system składu tekstu LaTeX, przy pomocy którego przygotowany został niniejszy dokument.
+
+Warto zauważyć, że wykorzystanie odpowiedniego szablonu w~znacznym stopniu odciąża studenta od czynności edytorskich, a~tym samym pozwala mu się skupić na stronie merytorycznej pracy. Wydział Elektryczny udostępnia studentom szablon dla~systemu LaTeX, a~także w~formacie MS Word.
+
+\section{Podstawowe wymiary i~układ pracy}\label{sec:wymiary}
+
+Pracę należy drukować dwustronnie z~wykorzystaniem drukarki laserowej lub atramentowej stosując druk czarno-biały lub kolorowy (strona tytułowa musi być kolorowa ze względu na logotyp Uczelni). \index{wymagana czcionka}Wymaganą czcionką tekstu głównego jest Franklin Gothic Book lub Helvetica o~rozmiarze \index{wymagana czcionka!wielkość czcionki}12~pt. 
+
+\index{marginesy}Zalecane marginesy: lewy 20~mm\footnote{1~mm = 2,85~pt}, prawy 20~mm, górny 20~mm, dolny 30~mm (ze~względu na numerację stron i~przypisy) oraz margines na oprawę~15~mm. Odległość pomiędzy wierszami --- 1,2~wiersza bez dodatkowych odstępów. Numeracja podrozdziałów nie powinna przekroczyć czterech stopni zagnieżdżenia tj. X.X.X.X. Jeśli występuje konieczność utworzenia dalszego zagłębienia należy przemyśleć strukturę dokumentu, gdyż najprawdopodobniej jest ona źle opracowana.
+
+\subsection{Strona tytułowa, strona streszczeń i~słów kluczowych}
+
+Strona tytułowa zawiera wyśrodkowany kolorowy logotyp Uczelni w układzie bocznym trzywersowym o~wysokości 1,5~cm oraz nazwę Wydziału pisaną czcionką 12~pt pogrubioną (bold). Poniżej znajdują się dane dotyczące kierunku studiów i specjalności (na studiach II stopnia) -- podajemy je wpisując odpowiednio słowa: ,,kierunek studiów:''oraz ,,specjalność:'' wraz z pogrubionymi ich nazwami (12~pt, bold). W~przypadku braku specjalności (na studiach I stopnia) usuwamy także słowo ,,specjalność:''.
+Poniżej wpisujemy informację o~rodzaju pracy (,,Praca dyplomowa inżynierska'' lub ,,Praca dyplomowa magisterska'') czcionką 16~pt oraz tytuły w języku polskim (16 pt, bold) oraz angielskim (14~pt, bold) pisane wielkimi literami, a~także imię i~nazwisko dyplomanta (14~pt, bold), a~w~liniach poniżej podajemy numer albumu (wpisując także słowa: ,,nr albumu:'' podobnie jak w przypadku kierunku studiów lub specjalności).
+Poniżej wpisujemy wyśrodkowane słowo ,,Opiekun:'' (czcionka 14~pt), pod którym umieszczamy tytuł lub stopień naukowy oraz imię i~nazwisko opiekuna pracy (14~pt, bold), a~w~kolejnym wierszu nazwę jednostki organizacyjnej (Katedry), w~której jest on zatrudniony.
+Poniżej umieścić można informacje dotyczące opiekuna zewnętrznego tj. tytuł lub stopień naukowy oraz nazwę podmiotu zewnętrznego (jeśli dotyczy). Opcja ta jest domyślnie wyłączona w~szablonie (w~przypadku konieczności jej użycia należy usunąć komentarz we właściwym miejscu pliku dyplomWEZUT.cls). Ostatnim elementem strony tytułowej jest podanie miejscowości ,,Szczecin'' (12~pt) oraz roku (12~pt), w~którym praca została przedstawiona do obrony.
+
+Wzorcem strony tytułowej pracy jednoosobowej jest pierwsza strona niniejszego dokumentu, w~wypadku krótszego lub dłuższego tytułu pracy zmianie ulegnie wyłącznie odstęp pomiędzy ostatnim wierszem tytułu w~języku angielskim a~informacjami o~opiekunie. Druga strona pracy pozostaje pusta.
+
+\textbf{Na trzeciej stronie pracy} należy umieścić streszczenia oraz słowa kluczowe w~języku polskim i~angielskim. Poniżej nagłówka (ok.~25~pt) piszemy odpowiednią treść streszczenia oraz słów kluczowych w obu językach.
+
+\subsection{Podział na rozdziały}
+
+Każdy rozdział powinien zaczynać się od nowej strony (najlepiej nieparzystej). W~odległości ok.~50~mm od górnej granicy strony wpisujemy dosunięty do lewego marginesu napis ,,ROZDZIAŁ'' (14~pt, bold) oraz numer rozdziału (cyfry arabskie, 14~pt, bold). W~odległości ok.~18~mm piszemy tytuł rozdziału\footnote{po tytułach rozdziałów i~podrozdziałów nie stawia się kropki} (20~pt, bold), a~następnie w~odległości ok.~20~mm rozpoczynamy pisanie tekstu pracy. Zaleca się, aby pierwszy akapit po tytule rozdziału czy sekcji nie zawierał wcięcia akapitowego (w~innym przypadku wcięcie akapitowe jest wielkości ok.~10~mm).
+
+Tytuł podrozdziału (poziom typu X.X., np.~2.1. -- 17~pt, bold) powinien posiadać odstęp przed (ok.~16~mm) i~po (ok.~9~mm). Poziom niższy śródtytułu (X.X.X., np.~2.1.1. -- 14~pt, bold) powinien posiadać odstępy przed (ok.~10~mm) i~po (ok.~9~mm).
+
+\subsection{Wzory matematyczne}\label{subsec:equations}
+
+Wielkość czcionki wzoru powinna być taka sama jak tekstu głównego. Można rozróżnić trzy typowe rozwiązania podczas pisania wzorów matematycznych wewnątrz dokumentu.
+
+Pierwszym sposobem jest pisanie wzoru w~tekście bez stosowania eksponowania i~bez numeracji. Dotyczyć to powinno wzorów mniej znaczących, które nie wymagają eksponowania, a~tym bardziej zastosowania numeracji w~celu późniejszego odniesienia się do nich. Oto przykład wzoru tak składanego: $K=\sum_{i=0}^n k_{i}^{3}$.
+
+Drugi sposób to wzór eksponowany:
+
+$$K=\sum_{i=0}^n k_{i}^{3}$$
+
+Jest to przypadek stosowany podczas wyprowadzeń jako etap pośredni, mniej istotny. Najistotniejsze wzory, szczególnie takie, które będą pomocne w~dalszej części pracy, powinny zostać wyeksponowane i~numerowane (sposób trzeci):
+
+% ------------------------------------------------------------------------------
+% Proszę zwrócić uwagę na możliwość użycia roszerzonych znaków (np. greckich
+% liter) bez wykorzystania specjalnych komend dzięki kodowaniu utf8 i XeTeX.
+% Specjalne komendy znakowe wciąż są obsługiwane np. \infty -> ∞.
+% ------------------------------------------------------------------------------
+
+\begin{equation}\label{eq:przykladowy}
+	K=\sum_{i=0}^n k_{i}^{3}
+\end{equation}
+
+\begin{equation}\label{eq:przykladowy2}
+	ϕ=\prod_{α=0}^n α^{3γ} + \int\limits_{-∞}^{∞} \! α^{t\sqrt{γ}} \, \mathup{d}γ
+\end{equation}
+
+Elementy wzorów umieszczane w~tekście należy wpisywać tym samym stylem czcionki co we wzorze np. ,,zmienna $i$ oznacza indeks''. Numerację wzoru umieszcza się po prawej stronie i~jest ona ciągła w~ramach rozdziału np.~(\ref{eq:przykladowy2}). Odnośniki do wzoru można realizować według następujących przykładów: ,,ze wzoru (\ref{eq:przykladowy}) na stronie \pageref{eq:przykladowy} wynika...'' lub ,,uwzględniając (\ref{eq:przykladowy}) oraz (\ref{eq:przykladowy2}) otrzymujemy...'' itp.
+
+\subsection{Rysunki}
+
+Każdy rysunek umieszczony w~tekście (w~odległości ok.~7~mm od poprzedzającego wiersza) powinien zawierać opis \textbf{pod} rysunkiem\index{podpis!pod rysunkiem} (w~odległości ok.~7~mm poniżej), zaczynający się od ,,Rysunek X.X'' (11~pt, bold) a~następnie opis rysunku złożony czcionką 11~pt.
+
+W~wypadku rysunków zaczerpniętych z~literatury pod opisem rysunku powinna znaleźć się informacja ,,Źródło: (11~pt)'' i~podajemy opis wraz ze wskazaniem źródła bibliograficznego (np.~,,Na podstawie~\cite{Opoka2001}'').
+
+Zaleca się, aby podpis pod rysunkiem był dosunięty do lewego marginesu. Numeracja rysunków powinna być ciągła w~ramach rozdziału -- np.~Rysunek~\ref{fig:rys2}. W~tekście pracy odnośniki do numeru rysunku wykonujemy wpisując słowo ,,Rysunek'' i~podając jego numer np. ,,patrz Rysunek~\ref{fig:rys2} na stronie~\pageref{fig:rys2}''. Podanie numeru strony, na której ten rysunek się znajduje, nie jest konieczne, jednak ułatwia czytelnikowi poruszanie się po tekście pracy. Rysunki umieszczamy jako wyśrodkowane bezpośrednio lub możliwie blisko \textbf{po} fragmencie tekstu, w~którym nastąpiło pierwsze odwołanie się do danego rysunku.
+
+% ------------------------------------------------------------------------------
+% Polecenie \rysunek oraz \rysunekb
+% ------------------------------------------------------------------------------
+% Opis:
+% Dodaje grafikę do strony, <rysunekb> dodatkowo dodaje ramkę
+%
+% Wywołanie:
+% \rysunek{nazwa_pliku_bez_rozszerzenia}
+% {Podpis pod rysunkiem\label{fig:etykieta}}
+% {Definicja źródła}
+%
+% Uwaga! Grafikę należy umieścić w folderze [graphic]
+% ------------------------------------------------------------------------------
+
+\rysunekb{rys}
+{Podpis pod rysunkiem (bez kropki)\label{fig:rys}}
+{Na podstawie~\cite{Opoka2001}}
+
+\rysunek{rys2}
+{Rysunek z~Matlaba (print -depsc2 name.eps)\label{fig:rys2}}
+{Opracowanie na podstawie dokumentacji elektronicznej MATLAB 7.0~\cite{Mathworks2004}}
+
+\subsection{Tabele}
+
+Każda tabela powinna zawierać opis umieszczony \textbf{nad} tabelą. Piszemy ,,\textbf{Tabela~X.X}'' (11~pt, bold, 11~mm poniżej tekstu głównego) i~dalej treść opisu (11~pt)\index{podpis!nad tabelą}. Zaleca się, aby podpis nad tabelą był dosunięty do lewego marginesu, natomiast sama tabela może być wyśrodkowana. Skład tabeli rozpoczynamy ok. 4~mm poniżej jej opisu.
+
+% ------------------------------------------------------------------------------
+% Polecenie \tabela
+% ------------------------------------------------------------------------------
+% Opis:
+% Dodaje sformatowaną tabelę
+%
+% Wywołanie:
+% \tabela{Opis ponad tabelą\label{tab:etykieta}}
+% {Definicja źródła}
+% {Ciało tabeli [\begin{tabular} ... \end{tabular}]}
+% ------------------------------------------------------------------------------
+
+\tabela{Przykładowy opis tabeli (bez kropki na końcu)\label{tab:coeff}}
+{Na podstawie [źródło bibliograficzne]}
+{\begin{tabular}{c|r|r}
+Współczynnik & $α=\,$10,8 & $α=\,$7,9 \\\hline\hline
+$a_0$ &   1,0000 &   1,0000\\
+$a_2$ &  -6,3710 &  -4,9320\\
+$a_4$ &  18,4145 &  10,6350\\
+$a_6$ & -32,1102 & -13,3432\\
+$a_8$ &  37,7124 &  10,9568\\
+\end{tabular}}
+
+Odnośniki do tabel umieszczamy według podobnej zasady jak w~wypadku rysunków np.: ,,... patrz Tabela~\ref{tab:coeff} na stronie~\pageref{tab:coeff}''. Tekst główny kontynuujemy ok.~10~mm poniżej tabeli. W~wypadku tabeli zaczerpniętych z~literatury pod opisem tabeli powinna znaleźć się informacja ,,Źródło: (11~pt)'' -- podajemy tu opis wraz ze wskazaniem źródła bibliograficznego (np.~,,Na podstawie~[7]'').
+
+\subsection{Kody źródłowe}
+
+Kody programów składamy czcionką maszynową Inconsolata (10~pt) z~uwzględnieniem, w~razie potrzeby, kolorowania składni. W~treści pracy należy podawać jedynie \textbf{najważniejsze} klasy, procedury lub funkcje a~pozostałe kody źródłowe można zawrzeć i~omówić w~dodatku (Dodatek~\ref{chap:dodatek1} na stronie~\pageref{chap:dodatek1}) lub umieścić tylko na dołączonej płycie CD-ROM.
+
+Kody źródłowe umieszczamy pomiędzy liniami poziomymi zgodnie z~przykładem. Opis powinien znajdować się \textbf{nad}\index{podpis!nad kodem źródłowym} umieszczonym kodem. Piszemy ,,\textbf{Kod źródłowy X.X'' (12~pt, bold)} a~następnie czcionką podstawową (12~pt) treść opisu. W~wypadku, gdy dyplomant zamieszcza kody źródłowe nie swojego autorstwa, powinien wskazać ich źródło.
+
+% ------------------------------------------------------------------------------
+% Polecenie \code
+% ------------------------------------------------------------------------------
+% Opis:
+% Dodaje kod źródłowy z opisem
+%
+% Wywołanie:
+% \code{Opis kodu}{Definicja źródła}{\label{kod:etykieta}}
+% \begin{lstlisting}[language=JęzykProgramowania] LUB
+% \begin{lstlisting}[float,language=JęzykProgramowania] (w tym wypadku listing
+% potraktowany zostanie jako float - przydatne, gdy kod przenoszony jest do
+% nowej strony w nieelegancki sposób, ale nie nadaje się do długich kodów)
+%
+% ... kod (klasa/funkcja/metoda) ...
+%
+% \end{lstlisting}
+% ------------------------------------------------------------------------------
+
+\code{Kod procedury generowania rysunku}
+{Na podstawie~\cite{Mathworks2004}}{\label{kod:prog}}
+\begin{lstlisting}[language=Matlab]
+% To jest przykład
+u = [zeros(1,10) 1 zeros(1,20)];
+% Plot
+stem(n,u);
+xlabel('Time index n');
+ylabel('Amplitude');
+title('Unit Sample Sequence');
+axis([-10 20 0 1.2]);
+\end{lstlisting}
+
+W~treści pracy możemy odnosić się do opisów kodu źródłowego w~następujący sposób: ,,... patrz Kod źródłowy~\ref{kod:prog} na stronie~\pageref{kod:prog}''. Możemy również odnosić się do konkretnych nazw klas bądź metod w tekście np. ,,funkcja \lstinline|title(...)| umożliwia dodanie tytułu do wykresu w środowisku Matlab''.
+
+Zdarzyć się może, że będziemy chcieli omówić pewien fragment kodu źródłowego. Pomocne stają się wtedy znaczniki linii zamieszczone w formatowaniu kodów źródłowych, np. ,,Wiersze od piątego do ósmego (kod źródłowy~\ref{kod:prog}) zawierają przykładowe formatowanie wykresu typu \lstinline|stem()|''.
+
+Kod źródłowy~\ref{kod:sapjoin} jest przykładem dołączania listingu z pliku poprzez polecenie \lstinline|\codeinput|. Dokumentacja polecenia zawarta jest w pliku \lstinline|Pracadyp.tex| w linii 342.
+
+W~wypadku wykorzystania oprogramowania specjalistycznego (na~przykład popularny Doxygen), które generuje sformatowaną dokumentację przydatną w~pracy, można bez dodatkowego formatowania umieścić ją w~dodatku.
+
+% ------------------------------------------------------------------------------
+% Polecenie \codeinput
+% ------------------------------------------------------------------------------
+% Opis:
+% Dodaje kod źródłowy z pliku
+%
+% Wywołanie:
+% \codeinput{Opis kodu}{Definicja źródła}{\label{kod:etykieta}}
+% {Nazwa pliku z rozszerzeniem}{Opcje dodatkowe, np. language=Matlab}
+% 
+% Uwaga: Pliki powinny być umieszczone w folderze [code]
+% ------------------------------------------------------------------------------
+
+\codeinput{Procedura dołączenia do grupy odbiorców SAP}
+{Opracowanie własne}{\label{kod:sapjoin}}
+{udp_client.cs}{language={[Sharp]C}}
+
+\subsection{Bibliografia}
+
+Wszystkie pozycje bibliograficzne powinny być zacytowane w~treści pracy.
+
+Opisy bibliograficzne wynikają ze zwyczajów stosowanych w~różnych dziedzinach nauki lub wytycznych różnych wydawnictw. Przygotowując bibliografię powinno się więc \textbf{konsekwentnie przestrzegać} kolejności elementów opisu, jak i~sposobu ich zredagowania. Opis bibliograficzny powinien być przygotowany tak, aby możliwe było jednoznaczne określenie źródła bibliograficznego. Przy sporządzaniu bibliografii zaleca się \textbf{przyjąć kolejność alfabetyczną} względem nazwiska pierwszego autora, natomiast przy kilku pracach tego samego pierwszego autora przyjąć należy ich kolejność według daty publikacji (rosnąco). W~wypadku wykorzystania w~pracy źródeł drukowanych lub internetowych nieposiadających jawnie wskazanych autorów (np. materiały firmowe, dokumentacje), można w~spisie bibliografii wydzielić taką grupę źródeł bibliograficznych.
+
+Przykład cytowania źródła internetowego:~\cite{Chwalowski2002}, podręcznika dostępnego w~wersji elektronicznej:~\cite{Nowacki1996,Reckdahl1997}, artykułu naukowego:~\cite{Iksinski2000} i~książki:~\cite{Honczarenko2000,Opoka2001}.
+
+Wygodne narzędzie do posługiwania się wieloma pozycjami literaturowymi stanowić może menedżer bibliografii zgodny z notacją BibTeX np. darmowy JabRef. Plik przechowujący pozycje bibliograficzne zdefiniowane dla dokumentu ma nazwę \lstinline|bibliografia.bib|. Na podstawie tego pliku LaTeX generuje spis literatury (Bibliografię). Do tego celu służy pakiet \textbf{Biber}, stanowiący następcę pakietu BibTeX, zapewniający m.in. pełne wsparcie standardu Unicode. W~przypadku użycia edytora TeXstudio współpracującego ze środowiskiem MiKTeX w~systemie Windows, może być konieczna zmiana domyślnego narzędzia bibliograficznego w~konfiguracji programu (menu: opcje/konfiguruj/zbuduj/metapolecenia), a~także jego wywołanie (menu: narzędzia/bibliografia lub skrót klawiszowy F8), a~następnie ponowna kompilacja dokumentu.  
+
+\subsection{Spisy rysunków, tabel, symboli i~skrótów, kodów źródłowych}
+
+Każdy spis powinien rozpoczynać się na oddzielnej stronie. Należy umieścić odpowiedni nagłówek na górze strony (ok.~70~pt od góry) tj. ,,Spis rysunków'', ,,Spis tabel'', ,,Wykaz ważniejszych oznaczeń i~skrótów'', ,,Spis kodów źródłowych'' czcionką pogrubioną wielkości~20~pt. Poniżej (ok.~55~pt) należy umieścić właściwy spis pisany czcionką podstawową~(12~pt) z~podstawową odległością pomiędzy wierszami.
+
+Wykaz ważniejszych oznaczeń i~skrótów należy umieścić na początku pracy dyplomowej na nowej stronie po spisie treści. Przy wykonywaniu tego spisu powinno się stosować kolejność sortowania: skróty alfabetycznie, oznaczenia łacińskie - małe litery, wielkie litery, oznaczenia literami alfabetu greckiego - małe litery, wielkie litery, inne. Pozostałe spisy umieszcza się na końcu pracy dyplomowej.
+
+\subsection{Skorowidz}\index{Skorowidz}
+
+Skorowidz nie jest elementem obowiązkowym pracy dyplomowej. Jednak w~wypadku prac obszernych, przeglądowych, opisujących wiele różnych terminów wykorzystanie skorowidza jest bardzo pomocne. Skorowidz wymusza również na autorze przemyślenie struktury terminów w~nim umieszczonych, a~co za tym idzie sama struktura treści pracy ulega uporządkowaniu.
+
+Na początku strony (ok.~70~pt od górnego marginesu) należy umieścić napis ,,Skorowidz'' (20~pt, bold). Poniżej (ok.~55~pt) wyliczamy hasła skorowidza wskazując po przecinku na stronę wystąpienia hasła. W~wypadku podhasła należy umieścić je jako podrzędne w~stosunku do hasła ważniejszego np.~hasło ,,transformata Fouriera'' będzie podhasłem hasła ,,transformata''. W~takim przypadku nie powtarzamy już słowa ,,transformata'' lecz zastępujemy je myślnikiem. W~przypadku użycia edytora TeXstudio współpracującego ze środowiskiem MiKTeX w~systemie Windows, w~celu umieszczenia skorowidza na końcu pracy może być konieczne "ręczne" wywołanie polecenia (menu: narzędzia/indeks).
+
+\index{transformata}
+\index{transformata!Fouriera}
+\index{transformata!Fouriera!Odwrotna}
+
+\section{Oprawa pracy dyplomowej}\label{sec:oprawa}\index{oprawa pracy}
+
+Wymaga się stosowania opraw ,,miękkich'' kanałowych z~grzbietami metalowymi (tzw. C-BIND) lub termobindowanych. Przednia okładka powinna być przezroczysta, tylna okładka może być plastikowa. Nie są dopuszczalne oprawy ,,twarde'' ani ,,zwykłe'' bindowanie.
+
+\chapter{Wymagania dotyczące wersji elektronicznej pracy dyplomowej}\label{chap:welektroniczna}\index{wersja elektroniczna}
+
+Zgodnie z~obowiązującym Zarządzeniem nr 80 Rektora ZUT z~dnia 13 czerwca 2022~r. w~sprawie Procedury procesu dyplomowania w~Zachodniopomorskim Uniwersytecie Technologicznym w~Szczecinie obowiązkiem studenta jest umieszczenie wersji elektronicznej pracy, tożsamej z~wersją drukowaną, w~uczelnianym systemie informatycznym (e-Dziekanat) celem jej archiwizacji i~kontroli w~Jednolitym Systemie Antyplagiatowym (JSA).
+
+Sposób złożenia pracy określony jest w~ww. Zarządzeniu Rektora ZUT. Student w~terminie nie dłuższym niż 8 dni od daty określonej w~Regulaminie Studiów dostarcza do dziekanatu 1 egzemplarz pracy w~formie papierowej wraz z~oświadczeniem dotyczącym przestrzegania praw autorskich. Dodatkowo na wniosek promotora i/lub recenzenta student dostarcza do wnioskujących odpowiednio po 1 egzemplarzu pracy w formie papierowej.
+
+Warto podkreślić, iż zgodnie z~obowiązującym Zarządzeniem Rektora ZUT w~sprawie Procedury procesu dyplomowania w~ZUT, \textbf{datą złożenia pracy jest data wygenerowania przez opiekuna raportu z~JSA} a~nie data złożenia pracy u~promotora (opiekuna), czy też umieszczenia jej w~uczelnianym systemie informatycznym.
+
+Zabrania się umieszczania w~wersji elektronicznej pracy dyplomowej dodatkowych elementów np. znaków wodnych. Wymagany jest jeden plik w~formacie PDF, pozbawiony zabezpieczeń, o~rozmiarze nieprzekraczającym \textbf{20 MB} umożliwiający przeszukiwanie tekstu w~całej treści pracy. Rozmiar pracy dyplomowej zawierającej załączniki nie może przekroczyć 60 MB. Wskazane jest, żeby załączniki dołączone do pracy zostały zarchiwizowane w~jednym pliku w~formacie zip.
+
+
+
+\begin{zakonczenie}\label{chap:zakonczenie}
+W~tym miejscu należy umieścić zakończenie pracy przygotowane zgodnie z~wcześniejszymi zaleceniami (patrz rozdział~\ref{sec:zakonczenie} na stronie~\pageref{sec:zakonczenie}).\index{transformata}
+\end{zakonczenie}
+
+% ---------- Załączniki (opcjonalnie) ----------
+% Jeżeli brak załączników, wykomentować aż do końca sekcji z załącznikami (Załączniki END)
+
+\appendix
+
+\chapter{Tytuł załącznika jeden}\label{chap:dodatek1}
+
+Treść załącznika jeden. Mogą to być elementy związane z~opisem technicznym wykonanych w~pracy urządzeń, programów, dokumentacją projektową itp. Mogą to być również źródła literaturowe w~postaci kart katalogowych najistotniejszych elementów elektronicznych użytych w~projektowanym urządzeniu itp.
+
+\chapter{Zawartość dodatkowej płyty CD-ROM}\label{chap:dodatkowyCD}
+
+W~tym rozdziale powinno się przedstawić \textbf{zawartość DODATKOWEJ płyty CD dołączonej ewentualnie do wydrukowanej pracy}, która zawiera kody programów, wersje elektroniczne dokumentacji, materiały dodatkowe zebrane przez studenta itp.
+
+\noindent\textbf{Uwaga! Nie jest to opis płyty, zawierającej wersję elektroniczną pracy, ale płyty dodatkowej, nieobowiązkowej.}
+
+% ---------- Załączniki END ------------
+
+% Bibliografia
+\printbibliography[heading=bibintoc]
+
+% Spis tabel (jeżeli jest potrzebny)
+\listoftables
+
+% Spis rysunków (jeżeli jest potrzebny)
+\listoffigures
+
+% Spis kodów źródłowych (jeżeli jest potrzebny)
+\listoflistings
+
+% TODO: Przenieść generowanie do pakietu glossaries i wyemilinować potrzebę manualnego wykonywania polecenia makeindex w terminalu. !! Dyskusyjne, indeksy należy definiować w preambule lub w osobnym pliku (tak samo jak acronyms), ale pozwala na większą swobodę w definiowaniu wpisów i nie wymaga wywoływania makeindex !!
+
+% Skorowidz (opcjonalnie), po skompilowaniu dokumentu należy użyć opcji Narzędzia -> Indeks,
+% aby wygenerować wpisy, po czym powtórnie skompilować dokument.
+\printindex
+
+\end{document}
