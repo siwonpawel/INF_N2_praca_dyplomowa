@@ -18,8 +18,8 @@
 
 \author{Paweł Siwoń}
 \nralbumu{56708}
-\title{Zastosowanie sztucznej inteligencji w klasyfikacji wiadomości e-mail: implementacja i analiza wydajności}
-\tytulang{Applying artificial intelligence to email classification: implementation and performance analysis}
+\title{Zastosowanie sztucznej inteligencji w wykrywaniu niechcianej poczty elektronicznej}
+\tytulang{Application of artificial intelligence in the detection of unwanted email}
 \kierunek{Informatyka}
 \rodzajstudiow{S2}
 \specjalnosc{Projektowanie oprogramowania}
@@ -35,40 +35,48 @@
 \opiekun{dr~hab.~inż.~Tomasz~Hyla,~-~prof.~ZUT}
 \jednostka{Katedra Inżynierii Oprogramowania i Cyberbezpieczeństwa}
 
-\slowakluczowe{klasyfikacja email, sztuczna inteligencja, wykrywanie spamu, wykrywanie phishingu, uczenie maszynowe}
-\keywords{email classification, artificial intelligence, spam detection, phishing detection, machine learning}
+\slowakluczowe{sztuczna inteligencja, klasyfikacja email, wykrywanie spamu, wykrywanie phishingu}
+\keywords{artificial intelligence, email classification, spam detection, phishing detection}
 
 \makemetadata
 
 \begin{document}
 
 \begin{streszczenie}
-Streszczenie pracy w~języku polskim zgodnie z~zaleceniami umieszczonymi w~rozdziale~\ref{subsec:streszczenie} na stronie~\pageref{subsec:streszczenie}. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami. Streszczenie pracy w~języku polskim zgodnie z~zaleceniami.
+Streszczenie pracy w~języku polskim
 \end{streszczenie}
 
 \begin{abstract}
-Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami umieszczonymi w~rozdziale~\ref{subsec:streszczenie} na stronie~\pageref{subsec:streszczenie}. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami. Streszczenie pracy w~języku angielskim zgodnie z~zaleceniami.
+Streszczenie pracy w~języku angielskim
 \end{abstract}
 
 \maketitle
 
+
 \begin{wprowadzenie}
+Internet jest wynalazkiem, który zrewolucjonizował dostęp do informacji jak i również komunikację interpersonalną. Początek bardzo dynamicznego rozwoju sieci Internet rozpoczął się z opracowaniem badań nad sieciami komputerowymi realizowanymi przez DARPA (ang. Defense Advanced Research Projects Agency) w latach 60. i 70. XX wieku w USA. Kluczowym dla opracowania pierwszej sieci komputerowej znanej pod nazwą ARPANET było opracowanie technologi packet switching. Technologia ta pozwoliła na przesyłanie danych w małych pakietach, co zapewniało odporność na awarie i efektywne zarządzanie ruchem sieciowym. Sieć ARPANET zaczęła funkcjonować w 1969 roku, a już w 1972 roku po raz pierwszy zaprezentowano jej możliwości na konferencji zorganizowanej przez Bob'a Kahn'a. Podczas tej konferencji zaprezentowano również pierwszą z usług sieciowych - pocztę elektroniczną (ang. e-mail)\cite{Int_hist}.
 
-Niniejszy dokument stanowi podstawowy zestaw wymagań i~zaleceń dotyczących przygotowywania i~oceniania prac dyplomowych magisterskich i~inżynierskich\footnote{w~zależności od rodzaju pracy w~miejscach, gdzie w~niniejszym dokumencie występują wyrażenia opcjonalne np.~,,magisterska/inżynierska'', należy pozostawić tylko właściwe sformułowanie. Dotyczy to również strony tytułowej.} realizowanych na Wydziale Elektrycznym Zachodniopomorskiego Uniwersytetu Technologicznego w~Szczecinie.
+Poczta elektroniczna szybko stała się, w tamtym czasie, głównym narzędziem komunikacji wśród naukowców a popularność tego narzędzia rosła wraz z rozprzestrzenianiem się internetu. W latach 80. i 90. XX wieku wprowadzono standardy takie jak SMTP\footnote{\textbf{SMTP (ang. Simple Mail Transfer Protocol)} - protokół używany do wysyłania wiadomości e-mail. Działa w modelu klient-serwer, gdzie klient (np. program pocztowy) przesyła e-mail do serwera SMTP, który następnie przekazuje go do docelowego serwera odbiorcy}, IMAP\footnote{\textbf{IMAP (ang. Internet Message Access Protocol)} - protokół umożliwiający odbieranie i zarządzanie wiadomościami e-mail na serwerze. IMAP pozwala na synchronizację skrzynki pocztowej na wielu urządzeniach, przechowywanie wiadomości na serwerze oraz organizowanie folderów.} i POP3\footnote{\textbf{POP3 (ang. Post Office Protocol version 3)} - protokół służący do pobierania wiadomości e-mail z serwera na urządzenie użytkownika. W przeciwieństwie do IMAP, wiadomości są zazwyczaj usuwane z serwera po pobraniu, co ogranicza dostęp do nich z innych urządzeń.}, które umożliwiły obsługę wiadomości na różnych urządzeniach i systemach. Rozwój natywnych aplikacji oraz serwisów udostępniających interfejs klienta poczty elektronicznej w formie strony internetowej (np. Hotmail, Gmail, Yahoo) jeszcze bardziej przyśpieszył adopcję e-mail w życiu codziennym przez wszystkich użytkowników internetu.
 
-W~rozdziale pierwszym zawarto podstawowe informacje o~elementach, jakie powinna zawierać praca dyplomowa. Wyszczególnienie pewnych ogólnie przyjętych elementów składowych tego typu opracowań ma pomóc dyplomantom w~poprawnym zredagowaniu pracy pod względem merytorycznym. Wymienione tu zagadnienia będą również wpływały na ocenę końcową przedłożonej pracy.  Rozdział drugi, jak i~cały skład niniejszego dokumentu, stanowi zestaw zaleceń edytorskich, jakie powinny spełniać prace dyplomowe pisane przez dyplomantów WE ZUT.
+Od momentu zaprezentowania usługa e-mail stała się nieodzownym narzędziem dla użytkowników internetu. Posiadanie adresu e-mail umożliwia dostęp do wielu usług online, m.in. takich jak bankowość elektroniczna, handel na giełdach czy też załatwianie spraw urzędowych. Wraz ze wzrostem znaczenia poczty elektronicznej wzrosła liczba zagrożeń z nią związanych. Ataki phishingowe, spam, malware oraz przechwytywanie wiadomości stały się powszechnymi metodami cyberprzestępców, którzy wykorzystują manipulację do wyłudzania danych lub uzyskania korzyści finansowych. Dlatego bezpieczeństwo poczty elektronicznej stało się kluczowym wyzwaniem, wymagającym stosowania zaawansowanych technologii ochronnych, takich jak szyfrowanie, uwierzytelnianie dwuskładnikowe czy filtry antyspamowe.
 
 \end{wprowadzenie}
 
-\cel{Zwięzły opis celu pracy dyplomowej. Należy pamiętać, aby cel
-omówiony w~tym miejscu wynikał z~zakresu określonego przez opiekuna
-w~karcie pracy dyplomowej.}
+\pagebreak
+\cel{Celem niniejszej pracy magisterskiej jest teoretyczna i eksperymentalna analiza różnych metod klasyfikacji poczty elektronicznej, ze szczególnym uwzględnieniem zastosowania technik sztucznej inteligencji. Klasyfikacja ta ma na celu identyfikację i filtrowanie różnych kategorii niechcianej poczty elektronicznej, takich jak spam oraz wiadomości phishingowe. W ramach pracy zostaną przeanalizowane aktualnie stosowane metody wykrywania niechcianej korespondencji, przygotowane zbiory testowe oraz przeprowadzone eksperymenty z wykorzystaniem minimum trzech różnych podejść bazujących na sztucznej inteligencji. Dodatkowo, opracowana zostanie aplikacja do wykrywania niechcianych wiadomości, której działanie zostanie zweryfikowane na rzeczywistych danych. Wyniki badań pozwolą na ocenę skuteczności poszczególnych technik oraz sformułowanie wniosków dotyczących ich praktycznego zastosowania.}
 
-\zakres{Zwięzły opis zakresu pracy dyplomowej. Należy pamiętać, aby
-zakres pracy omówiony w~tym miejscu był zgodny z~określonym przez
-opiekuna w~karcie pracy dyplomowej.} 
+\zakres{Zakres niniejszej pracy obejmuje następujące etapy:
+\begin{enumerate}
+    \item \textbf{Wprowadzenie do tematyki} – Omówienie problematyki związanej z wykorzystaniem poczty elektronicznej jako narzędzia do przeprowadzania cyberataków, ze szczególnym uwzględnieniem zagrożeń związanych ze spamem oraz phishingiem.
+    \item \textbf{Analiza istniejących metod wykrywania niechcianej poczty} – Przegląd i klasyfikacja aktualnych rozwiązań stosowanych do wykrywania spamu oraz wiadomości phishingowych, w tym metod bazujących na sztucznej inteligencji (np. uczenie maszynowe, sieci neuronowe, modele przetwarzania języka naturalnego).
+    \item \textbf{Przygotowanie zbiorów danych testowych} – Zebranie i opracowanie odpowiednich zbiorów wiadomości e-mail, zawierających zarówno wiadomości pożądane, jak i niechciane, które posłużą do trenowania i testowania modeli AI.
+    \item \textbf{Wybór i testowanie technik AI} – Wybór co najmniej trzech różnych metod klasyfikacji wiadomości e-mail z wykorzystaniem sztucznej inteligencji oraz ich eksperymentalna analiza pod kątem skuteczności i wydajności.
+    \item \textbf{Implementacja aplikacji do wykrywania niechcianych wiadomości} – Opracowanie narzędzia działającego na serwerze pocztowym lub lokalnym urządzeniu użytkownika, umożliwiającego automatyczną detekcję i filtrowanie niechcianej korespondencji.
+    \item \textbf{Eksperymentalna weryfikacja skuteczności} – Przeprowadzenie testów aplikacji na rzeczywistej poczcie elektronicznej w celu oceny efektywności i użyteczności opracowanego rozwiązania.
+    \item \textbf{Podsumowanie i wnioski} – Analiza uzyskanych wyników, porównanie skuteczności testowanych metod oraz sformułowanie rekomendacji dotyczących przyszłych badań i możliwości zastosowania sztucznej inteligencji w praktycznych systemach filtrowania poczty elektronicznej.
+\end{enumerate}} 
 
-\chapter{Zalecenia dotyczące treści i~kryteriów oceny pracy dyplomowej}\label{chap:pierwszy}
+\chapter{Wprowadzenie}\label{ch_01}
 
 Praca dyplomowa, pisana pod kierunkiem promotora (opiekuna), stanowi uwieńczenie całego okresu studiów i~powinna być dowodem na to, że jej autor posiadł odpowiednio wysoki poziom wiedzy merytorycznej z~danego zakresu i~potrafi tę wiedzę w~określonym węższym zakresie przetwarzać, a~wyniki tego przetworzenia przedstawić w~postaci opracowania mającego znamiona nowości naukowej lub technicznej. Ponieważ absolwent WE ZUT uzyskuje tytuł zawodowy inżyniera lub magistra inżyniera, jego praca dyplomowa powinna zawierać twórcze elementy praktyczne. 
 
